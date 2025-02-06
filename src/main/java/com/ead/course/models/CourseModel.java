@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -53,6 +57,8 @@ public class CourseModel implements Serializable {
     private UUID userInstructor;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // não vai retornar os módulos para o usuário apenas inserir
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY) // DELETAR TODOS OS MÓDULOS QUANDO DELETAR O CURSO
+    @Fetch(FetchMode.SUBSELECT) // DEFINO A ESTRATEGIA QUE O JPA IRA UTILIZAR, POR PADRÃO ELE UTILZIA JOIN
+//    @OnDelete(action = OnDeleteAction.CASCADE) // DELETAR TODOS OS MÓDULOS QUANDO DELETAR O CURSO
     private Set<ModuleModel> modules; // sempre usar Set para coleções pois o hibernate lida melhor do que com List.
 }

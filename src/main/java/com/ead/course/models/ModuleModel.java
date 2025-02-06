@@ -33,10 +33,10 @@ public class ModuleModel implements Serializable {
     private String creationDate;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // não vai retornar o curso para o usuário apenas inserir
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY) // sempre usar FetchType.LAZY para não trazer o curso junto com o módulo
     private CourseModel course;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "module")
+    @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
     private Set<LessonModel> lessons;
 }

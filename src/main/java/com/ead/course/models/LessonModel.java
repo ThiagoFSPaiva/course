@@ -36,7 +36,7 @@ public class LessonModel  implements Serializable {
 
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY) // sempre usar FetchType.LAZY para não trazer o módulo junto com a aula
     private ModuleModel module;
 
 }
