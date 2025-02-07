@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/lessons")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class LessonController {
 
