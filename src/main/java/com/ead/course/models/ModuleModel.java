@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class ModuleModel implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(nullable = false)
-    private String creationDate;
+    private LocalDateTime creationDate;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // não vai retornar o curso para o usuário apenas inserir
     @ManyToOne(optional = false, fetch = FetchType.LAZY) // sempre usar FetchType.LAZY para não trazer o curso junto com o módulo

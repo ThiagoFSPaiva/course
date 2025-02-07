@@ -76,6 +76,6 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.findById(courseId));
+        return ResponseEntity.status(HttpStatus.OK).body(courseModelOptional.get());
     }
 }
