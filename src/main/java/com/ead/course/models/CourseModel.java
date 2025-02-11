@@ -56,6 +56,10 @@ public class CourseModel implements Serializable {
     @Column(nullable = false)
     private UUID userInstructor;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private Set<CourseUserModel> coursesUsers;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // não vai retornar os módulos para o usuário apenas inserir
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY) // DELETAR TODOS OS MÓDULOS QUANDO DELETAR O CURSO
     @Fetch(FetchMode.SUBSELECT) // DEFINO A ESTRATEGIA QUE O JPA IRA UTILIZAR, POR PADRÃO ELE UTILZIA JOIN
